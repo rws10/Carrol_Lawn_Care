@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carrol Lawn Care", "Carrol Lawn Care\Carrol Lawn Care.csproj", "{946E3A97-DA66-4955-AAC0-C87E17A4BF69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carrol Lawn Care.Tests", "Carrol Lawn Care.Tests\Carrol Lawn Care.Tests.csproj", "{9F55791D-2636-49A5-ACD0-1D2E48F4887F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{946E3A97-DA66-4955-AAC0-C87E17A4BF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{946E3A97-DA66-4955-AAC0-C87E17A4BF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{946E3A97-DA66-4955-AAC0-C87E17A4BF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{946E3A97-DA66-4955-AAC0-C87E17A4BF69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F55791D-2636-49A5-ACD0-1D2E48F4887F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F55791D-2636-49A5-ACD0-1D2E48F4887F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F55791D-2636-49A5-ACD0-1D2E48F4887F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F55791D-2636-49A5-ACD0-1D2E48F4887F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
