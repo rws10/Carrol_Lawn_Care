@@ -8,7 +8,6 @@ namespace Carrol_Lawn_Care
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
         }
     }
 }

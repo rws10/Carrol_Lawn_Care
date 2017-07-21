@@ -10,6 +10,8 @@ namespace Carrol_Lawn_Care.Controllers
     {
         public ActionResult Index()
         {
+            //private Carrol_Lawn_Care.Models.DB_CLCEntities clcDB = new Models.DB_CLCEntities();
+
             return View();
         }
 

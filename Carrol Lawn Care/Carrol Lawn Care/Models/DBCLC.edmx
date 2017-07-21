@@ -516,6 +516,7 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <NavigationProperty Name="TblPer" Relationship="Self.FK__TblProp__perId__2C3393D0" FromRole="TblProp" ToRole="TblPers" />
           <NavigationProperty Name="TblEquip1" Relationship="Self.TblTruckAssigned" FromRole="TblProp" ToRole="TblEquip" />
           <NavigationProperty Name="TblPers" Relationship="Self.TblOwns" FromRole="TblProp" ToRole="TblPers" />
+          <Property Name="nextCut" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="TblTool">
           <Key>
