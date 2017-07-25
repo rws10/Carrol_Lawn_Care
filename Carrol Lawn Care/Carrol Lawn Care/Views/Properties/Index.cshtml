@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Carrol_Lawn_Care.Models.Property>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TblEquip.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TblPer.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.services)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recurrence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nextCut)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblEquip.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblPer.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.services)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recurrence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nextCut)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.propId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.propId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.propId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Carrol_Lawn_Care.Models.MaintenanceRecords>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TblEquip.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maintType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblEquip.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maintType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.maintId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.maintId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.maintId })
+        </td>
+    </tr>
+}
+
+</table>
