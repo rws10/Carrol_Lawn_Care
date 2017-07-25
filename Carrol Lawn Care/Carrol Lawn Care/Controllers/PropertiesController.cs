@@ -12,13 +12,12 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class PropertiesController : Controller
     {
-        private DBCLC db = new DBCLC();
+        private DB_CLCEntities db = new DB_CLCEntities();
 
         // GET: Properties
         public ActionResult Index()
         {
-            var tblProps = db.TblProps.Include(p => p.TblEquip).Include(p => p.TblPer);
-            return View(tblProps.ToList());
+            return View(db.Properties.ToList());
         }
 
         // GET: Properties/Details/5
@@ -28,7 +27,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.TblProps.Find(id);
+            Property property = db.Properties.Find(id);
             if (property == null)
             {
                 return HttpNotFound();
@@ -39,8 +38,6 @@ namespace Carrol_Lawn_Care.Controllers
         // GET: Properties/Create
         public ActionResult Create()
         {
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name");
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name");
             return View();
         }
 
@@ -49,17 +46,15 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "propId,address,services,cost,recurrence,nextCut,perId,equipId")] Property property)
+        public ActionResult Create([Bind(Include = "propId,address,services,cost,recurrence,nextCut")] Property property)
         {
             if (ModelState.IsValid)
             {
-                db.TblProps.Add(property);
+                db.Properties.Add(property);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", property.equipId);
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", property.perId);
             return View(property);
         }
 
@@ -70,13 +65,11 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.TblProps.Find(id);
+            Property property = db.Properties.Find(id);
             if (property == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", property.equipId);
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", property.perId);
             return View(property);
         }
 
@@ -85,7 +78,7 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "propId,address,services,cost,recurrence,nextCut,perId,equipId")] Property property)
+        public ActionResult Edit([Bind(Include = "propId,address,services,cost,recurrence,nextCut")] Property property)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +86,6 @@ namespace Carrol_Lawn_Care.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", property.equipId);
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", property.perId);
             return View(property);
         }
 
@@ -105,7 +96,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.TblProps.Find(id);
+            Property property = db.Properties.Find(id);
             if (property == null)
             {
                 return HttpNotFound();
@@ -118,8 +109,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Property property = db.TblProps.Find(id);
-            db.TblProps.Remove(property);
+            Property property = db.Properties.Find(id);
+            db.Properties.Remove(property);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

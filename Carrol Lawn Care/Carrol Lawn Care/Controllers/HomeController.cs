@@ -8,24 +8,9 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class HomeController : Controller
     {
+        // GET: Home
         public ActionResult Index()
         {
-            //private Carrol_Lawn_Care.Models.DB_CLCEntities clcDB = new Models.DB_CLCEntities();
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

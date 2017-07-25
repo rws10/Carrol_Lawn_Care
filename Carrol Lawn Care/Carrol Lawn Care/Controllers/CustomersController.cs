@@ -12,13 +12,13 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class CustomersController : Controller
     {
-        private DBCLC db = new DBCLC();
+        private DB_CLCEntities db = new DB_CLCEntities();
 
         // GET: Customers
         public ActionResult Index()
         {
-            var tblCusts = db.TblCusts.Include(c => c.TblPer);
-            return View(tblCusts.ToList());
+            var customers = db.Customers.Include(c => c.TblPer);
+            return View(customers.ToList());
         }
 
         // GET: Customers/Details/5
@@ -28,18 +28,18 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customers customers = db.TblCusts.Find(id);
-            if (customers == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(customers);
+            return View(customer);
         }
 
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name");
+            ViewBag.perId = new SelectList(db.People, "perId", "name");
             return View();
         }
 
@@ -48,17 +48,17 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "custId,perId")] Customers customers)
+        public ActionResult Create([Bind(Include = "custId,perId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.TblCusts.Add(customers);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", customers.perId);
-            return View(customers);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", customer.perId);
+            return View(customer);
         }
 
         // GET: Customers/Edit/5
@@ -68,13 +68,13 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customers customers = db.TblCusts.Find(id);
-            if (customers == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", customers.perId);
-            return View(customers);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", customer.perId);
+            return View(customer);
         }
 
         // POST: Customers/Edit/5
@@ -82,16 +82,16 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "custId,perId")] Customers customers)
+        public ActionResult Edit([Bind(Include = "custId,perId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customers).State = EntityState.Modified;
+                db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", customers.perId);
-            return View(customers);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", customer.perId);
+            return View(customer);
         }
 
         // GET: Customers/Delete/5
@@ -101,12 +101,12 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customers customers = db.TblCusts.Find(id);
-            if (customers == null)
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(customers);
+            return View(customer);
         }
 
         // POST: Customers/Delete/5
@@ -114,8 +114,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customers customers = db.TblCusts.Find(id);
-            db.TblCusts.Remove(customers);
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

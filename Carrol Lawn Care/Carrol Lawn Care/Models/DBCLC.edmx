@@ -1,0 +1,756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_CLCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblCust">
+          <Key>
+            <PropertyRef Name="custId" />
+          </Key>
+          <Property Name="custId" Type="int" Nullable="false" />
+          <Property Name="perId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblEmp">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="int" Nullable="false" />
+          <Property Name="perId" Type="int" Nullable="false" />
+          <Property Name="payRate" Type="real" Nullable="false" />
+          <Property Name="ssn" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblEmpAssigned">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="int" Nullable="false" />
+          <Property Name="truckId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblEquip">
+          <Key>
+            <PropertyRef Name="equipId" />
+          </Key>
+          <Property Name="equipId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fuelType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblMaintRec">
+          <Key>
+            <PropertyRef Name="maintId" />
+          </Key>
+          <Property Name="maintId" Type="int" Nullable="false" />
+          <Property Name="equipId" Type="int" Nullable="false" />
+          <Property Name="maintType" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cost" Type="real" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CLC.dbo.TblManages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TblManages">
+          <Key>
+            <PropertyRef Name="manId" />
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="manId" Type="int" Nullable="false" />
+          <Property Name="empId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TblOwns">
+          <Key>
+            <PropertyRef Name="perId" />
+            <PropertyRef Name="propID" />
+          </Key>
+          <Property Name="perId" Type="int" Nullable="false" />
+          <Property Name="propID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblPers">
+          <Key>
+            <PropertyRef Name="perId" />
+          </Key>
+          <Property Name="perId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblProp">
+          <Key>
+            <PropertyRef Name="propId" />
+          </Key>
+          <Property Name="propId" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="services" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="cost" Type="real" Nullable="false" />
+          <Property Name="recurrence" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="nextCut" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblTool">
+          <Key>
+            <PropertyRef Name="toolId" />
+          </Key>
+          <Property Name="toolId" Type="int" Nullable="false" />
+          <Property Name="equipId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblToolAssigned">
+          <Key>
+            <PropertyRef Name="toolId" />
+          </Key>
+          <Property Name="toolId" Type="int" Nullable="false" />
+          <Property Name="truckId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblTruckAssigned">
+          <Key>
+            <PropertyRef Name="propId" />
+          </Key>
+          <Property Name="propId" Type="int" Nullable="false" />
+          <Property Name="truckId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblVehicle">
+          <Key>
+            <PropertyRef Name="vehId" />
+          </Key>
+          <Property Name="vehId" Type="int" Nullable="false" />
+          <Property Name="equipId" Type="int" Nullable="false" />
+          <Property Name="licPlate" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Owns__perId__34C8D9D1">
+          <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
+          <End Role="TblOwns" Type="Self.TblOwns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblOwns">
+              <PropertyRef Name="perId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Owns__propID__35BCFE0A">
+          <End Role="TblProp" Type="Self.TblProp" Multiplicity="1" />
+          <End Role="TblOwns" Type="Self.TblOwns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProp">
+              <PropertyRef Name="propId" />
+            </Principal>
+            <Dependent Role="TblOwns">
+              <PropertyRef Name="propID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblCust__perId__1FCDBCEB">
+          <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
+          <End Role="TblCust" Type="Self.TblCust" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblCust">
+              <PropertyRef Name="perId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblEmp__perId__1A14E395">
+          <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
+          <End Role="TblEmp" Type="Self.TblEmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblEmp">
+              <PropertyRef Name="perId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblEmpAss__empId__45F365D3">
+          <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
+          <End Role="TblEmpAssigned" Type="Self.TblEmpAssigned" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblEmpAssigned">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblEmpAss__truck__46E78A0C">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblEmpAssigned" Type="Self.TblEmpAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblEmpAssigned">
+              <PropertyRef Name="truckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblMaintR__equip__276EDEB3">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblMaintRec" Type="Self.TblMaintRec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblMaintRec">
+              <PropertyRef Name="equipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblManage__empId__22AA2996">
+          <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
+          <End Role="TblManages" Type="Self.TblManages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblManages">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblManage__manId__21B6055D">
+          <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
+          <End Role="TblManages" Type="Self.TblManages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblManages">
+              <PropertyRef Name="manId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblTool__equipId__6E01572D">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblTool" Type="Self.TblTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblTool">
+              <PropertyRef Name="equipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblToolAs__toolI__3A81B327">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblToolAssigned" Type="Self.TblToolAssigned" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblToolAssigned">
+              <PropertyRef Name="toolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblToolAs__truck__3B75D760">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblToolAssigned" Type="Self.TblToolAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblToolAssigned">
+              <PropertyRef Name="truckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblTruckA__propI__6754599E">
+          <End Role="TblProp" Type="Self.TblProp" Multiplicity="1" />
+          <End Role="TblTruckAssigned" Type="Self.TblTruckAssigned" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TblProp">
+              <PropertyRef Name="propId" />
+            </Principal>
+            <Dependent Role="TblTruckAssigned">
+              <PropertyRef Name="propId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblTruckA__truck__68487DD7">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblTruckAssigned" Type="Self.TblTruckAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblTruckAssigned">
+              <PropertyRef Name="truckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblVehicl__equpI__5CD6CB2B">
+          <End Role="TblEquip" Type="Self.TblEquip" Multiplicity="1" />
+          <End Role="TblVehicle" Type="Self.TblVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblVehicle">
+              <PropertyRef Name="equipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_CLCModelStoreContainer">
+          <EntitySet Name="TblCust" EntityType="Self.TblCust" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmp" EntityType="Self.TblEmp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmpAssigned" EntityType="Self.TblEmpAssigned" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEquip" EntityType="Self.TblEquip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblMaintRec" EntityType="Self.TblMaintRec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblPers" EntityType="Self.TblPers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProp" EntityType="Self.TblProp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblTool" EntityType="Self.TblTool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblToolAssigned" EntityType="Self.TblToolAssigned" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblTruckAssigned" EntityType="Self.TblTruckAssigned" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblVehicle" EntityType="Self.TblVehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblManages" EntityType="Self.TblManages" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TblManages].[manId] AS [manId], 
+    [TblManages].[empId] AS [empId]
+    FROM [dbo].[TblManages] AS [TblManages]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TblOwns" EntityType="Self.TblOwns" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TblOwns].[perId] AS [perId], 
+    [TblOwns].[propID] AS [propID]
+    FROM [dbo].[TblOwns] AS [TblOwns]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Owns__perId__34C8D9D1" Association="Self.FK__Owns__perId__34C8D9D1">
+            <End Role="TblPers" EntitySet="TblPers" />
+            <End Role="TblOwns" EntitySet="TblOwns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Owns__propID__35BCFE0A" Association="Self.FK__Owns__propID__35BCFE0A">
+            <End Role="TblProp" EntitySet="TblProp" />
+            <End Role="TblOwns" EntitySet="TblOwns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblCust__perId__1FCDBCEB" Association="Self.FK__TblCust__perId__1FCDBCEB">
+            <End Role="TblPers" EntitySet="TblPers" />
+            <End Role="TblCust" EntitySet="TblCust" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblEmp__perId__1A14E395" Association="Self.FK__TblEmp__perId__1A14E395">
+            <End Role="TblPers" EntitySet="TblPers" />
+            <End Role="TblEmp" EntitySet="TblEmp" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblEmpAss__empId__45F365D3" Association="Self.FK__TblEmpAss__empId__45F365D3">
+            <End Role="TblPers" EntitySet="TblPers" />
+            <End Role="TblEmpAssigned" EntitySet="TblEmpAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblEmpAss__truck__46E78A0C" Association="Self.FK__TblEmpAss__truck__46E78A0C">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblEmpAssigned" EntitySet="TblEmpAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblMaintR__equip__276EDEB3" Association="Self.FK__TblMaintR__equip__276EDEB3">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblMaintRec" EntitySet="TblMaintRec" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblManage__empId__22AA2996" Association="Self.FK__TblManage__empId__22AA2996">
+            <End Role="TblPers" EntitySet="TblPers" />
+            <End Role="TblManages" EntitySet="TblManages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblManage__manId__21B6055D" Association="Self.FK__TblManage__manId__21B6055D">
+            <End Role="TblPers" EntitySet="TblPers" />
+            <End Role="TblManages" EntitySet="TblManages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblTool__equipId__6E01572D" Association="Self.FK__TblTool__equipId__6E01572D">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblTool" EntitySet="TblTool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblToolAs__toolI__3A81B327" Association="Self.FK__TblToolAs__toolI__3A81B327">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblToolAssigned" EntitySet="TblToolAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblToolAs__truck__3B75D760" Association="Self.FK__TblToolAs__truck__3B75D760">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblToolAssigned" EntitySet="TblToolAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblTruckA__propI__6754599E" Association="Self.FK__TblTruckA__propI__6754599E">
+            <End Role="TblProp" EntitySet="TblProp" />
+            <End Role="TblTruckAssigned" EntitySet="TblTruckAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblTruckA__truck__68487DD7" Association="Self.FK__TblTruckA__truck__68487DD7">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblTruckAssigned" EntitySet="TblTruckAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblVehicl__equpI__5CD6CB2B" Association="Self.FK__TblVehicl__equpI__5CD6CB2B">
+            <End Role="TblEquip" EntitySet="TblEquip" />
+            <End Role="TblVehicle" EntitySet="TblVehicle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_CLCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="custId" />
+          </Key>
+          <Property Name="custId" Type="Int32" Nullable="false" />
+          <Property Name="perId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TblPer" Relationship="Self.FK__TblCust__perId__1FCDBCEB" FromRole="TblCust" ToRole="TblPers" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="Int32" Nullable="false" />
+          <Property Name="perId" Type="Int32" Nullable="false" />
+          <Property Name="payRate" Type="Single" Nullable="false" />
+          <Property Name="ssn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TblPer" Relationship="Self.FK__TblEmp__perId__1A14E395" FromRole="TblEmp" ToRole="TblPers" />
+        </EntityType>
+        <EntityType Name="Equip">
+          <Key>
+            <PropertyRef Name="equipId" />
+          </Key>
+          <Property Name="equipId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TblMaintRecs" Relationship="Self.FK__TblMaintR__equip__276EDEB3" FromRole="TblEquip" ToRole="TblMaintRec" />
+          <NavigationProperty Name="TblTools" Relationship="Self.FK__TblTool__equipId__6E01572D" FromRole="TblEquip" ToRole="TblTool" />
+          <NavigationProperty Name="TblVehicles" Relationship="Self.FK__TblVehicl__equpI__5CD6CB2B" FromRole="TblEquip" ToRole="TblVehicle" />
+          <NavigationProperty Name="TblPers" Relationship="Self.TblEmpAssigned" FromRole="TblEquip" ToRole="TblPers" />
+          <NavigationProperty Name="TblEquip1" Relationship="Self.TblToolAssigned" FromRole="TblEquip" ToRole="TblEquip1" />
+          <NavigationProperty Name="TblEquips" Relationship="Self.TblToolAssigned" FromRole="TblEquip1" ToRole="TblEquip" />
+          <NavigationProperty Name="TblProps" Relationship="Self.TblTruckAssigned" FromRole="TblEquip" ToRole="TblProp" />
+        </EntityType>
+        <EntityType Name="MaintenanceRecord">
+          <Key>
+            <PropertyRef Name="maintId" />
+          </Key>
+          <Property Name="maintId" Type="Int32" Nullable="false" />
+          <Property Name="equipId" Type="Int32" Nullable="false" />
+          <Property Name="maintType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Single" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TblEquip" Relationship="Self.FK__TblMaintR__equip__276EDEB3" FromRole="TblMaintRec" ToRole="TblEquip" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="perId" />
+          </Key>
+          <Property Name="perId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TblCusts" Relationship="Self.FK__TblCust__perId__1FCDBCEB" FromRole="TblPers" ToRole="TblCust" />
+          <NavigationProperty Name="TblEmps" Relationship="Self.FK__TblEmp__perId__1A14E395" FromRole="TblPers" ToRole="TblEmp" />
+          <NavigationProperty Name="TblEquip" Relationship="Self.TblEmpAssigned" FromRole="TblPers" ToRole="TblEquip" />
+          <NavigationProperty Name="TblPers1" Relationship="Self.TblManages" FromRole="TblPers" ToRole="TblPers1" />
+          <NavigationProperty Name="TblPers" Relationship="Self.TblManages" FromRole="TblPers1" ToRole="TblPers" />
+          <NavigationProperty Name="TblProps" Relationship="Self.TblOwns" FromRole="TblPers" ToRole="TblProp" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="propId" />
+          </Key>
+          <Property Name="propId" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="services" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Single" Nullable="false" />
+          <Property Name="recurrence" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nextCut" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblEquip" Relationship="Self.TblTruckAssigned" FromRole="TblProp" ToRole="TblEquip" />
+          <NavigationProperty Name="TblPers" Relationship="Self.TblOwns" FromRole="TblProp" ToRole="TblPers" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="toolId" />
+          </Key>
+          <Property Name="toolId" Type="Int32" Nullable="false" />
+          <Property Name="equipId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TblEquip" Relationship="Self.FK__TblTool__equipId__6E01572D" FromRole="TblTool" ToRole="TblEquip" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="vehId" />
+          </Key>
+          <Property Name="vehId" Type="Int32" Nullable="false" />
+          <Property Name="equipId" Type="Int32" Nullable="false" />
+          <Property Name="licPlate" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TblEquip" Relationship="Self.FK__TblVehicl__equpI__5CD6CB2B" FromRole="TblVehicle" ToRole="TblEquip" />
+        </EntityType>
+        <Association Name="FK__TblCust__perId__1FCDBCEB">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="1" />
+          <End Role="TblCust" Type="DB_CLCModel.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblCust">
+              <PropertyRef Name="perId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblEmp__perId__1A14E395">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="1" />
+          <End Role="TblEmp" Type="DB_CLCModel.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblEmp">
+              <PropertyRef Name="perId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblMaintR__equip__276EDEB3">
+          <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="1" />
+          <End Role="TblMaintRec" Type="DB_CLCModel.MaintenanceRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblMaintRec">
+              <PropertyRef Name="equipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblTool__equipId__6E01572D">
+          <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="1" />
+          <End Role="TblTool" Type="DB_CLCModel.Tool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblTool">
+              <PropertyRef Name="equipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TblVehicl__equpI__5CD6CB2B">
+          <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="1" />
+          <End Role="TblVehicle" Type="DB_CLCModel.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEquip">
+              <PropertyRef Name="equipId" />
+            </Principal>
+            <Dependent Role="TblVehicle">
+              <PropertyRef Name="equipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TblEmpAssigned">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
+          <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
+        </Association>
+        <Association Name="TblToolAssigned">
+          <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="*" />
+          <End Role="TblEquip1" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
+        </Association>
+        <Association Name="TblTruckAssigned">
+          <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="*" />
+          <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
+        </Association>
+        <Association Name="TblManages">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
+          <End Role="TblPers1" Type="DB_CLCModel.Person" Multiplicity="*" />
+        </Association>
+        <Association Name="TblOwns">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
+          <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DB_CLCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="DB_CLCModel.Customer" />
+          <EntitySet Name="Employees" EntityType="DB_CLCModel.Employee" />
+          <EntitySet Name="Equips" EntityType="DB_CLCModel.Equip" />
+          <EntitySet Name="MaintenanceRecords1" EntityType="DB_CLCModel.MaintenanceRecord" />
+          <EntitySet Name="People" EntityType="DB_CLCModel.Person" />
+          <EntitySet Name="Properties" EntityType="DB_CLCModel.Property" />
+          <EntitySet Name="Tools" EntityType="DB_CLCModel.Tool" />
+          <EntitySet Name="Vehicles" EntityType="DB_CLCModel.Vehicle" />
+          <AssociationSet Name="FK__TblCust__perId__1FCDBCEB" Association="Self.FK__TblCust__perId__1FCDBCEB">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblCust" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblEmp__perId__1A14E395" Association="Self.FK__TblEmp__perId__1A14E395">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblEmp" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblMaintR__equip__276EDEB3" Association="Self.FK__TblMaintR__equip__276EDEB3">
+            <End Role="TblEquip" EntitySet="Equips" />
+            <End Role="TblMaintRec" EntitySet="MaintenanceRecords1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblTool__equipId__6E01572D" Association="Self.FK__TblTool__equipId__6E01572D">
+            <End Role="TblEquip" EntitySet="Equips" />
+            <End Role="TblTool" EntitySet="Tools" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TblVehicl__equpI__5CD6CB2B" Association="Self.FK__TblVehicl__equpI__5CD6CB2B">
+            <End Role="TblEquip" EntitySet="Equips" />
+            <End Role="TblVehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="TblEmpAssigned" Association="Self.TblEmpAssigned">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblEquip" EntitySet="Equips" />
+          </AssociationSet>
+          <AssociationSet Name="TblToolAssigned" Association="Self.TblToolAssigned">
+            <End Role="TblEquip" EntitySet="Equips" />
+            <End Role="TblEquip1" EntitySet="Equips" />
+          </AssociationSet>
+          <AssociationSet Name="TblTruckAssigned" Association="Self.TblTruckAssigned">
+            <End Role="TblProp" EntitySet="Properties" />
+            <End Role="TblEquip" EntitySet="Equips" />
+          </AssociationSet>
+          <AssociationSet Name="TblManages" Association="Self.TblManages">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblPers1" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="TblOwns" Association="Self.TblOwns">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblProp" EntitySet="Properties" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_CLCModelStoreContainer" CdmEntityContainer="DB_CLCEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DB_CLCModel.Customer">
+              <MappingFragment StoreEntitySet="TblCust">
+                <ScalarProperty Name="custId" ColumnName="custId" />
+                <ScalarProperty Name="perId" ColumnName="perId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DB_CLCModel.Employee">
+              <MappingFragment StoreEntitySet="TblEmp">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="perId" ColumnName="perId" />
+                <ScalarProperty Name="payRate" ColumnName="payRate" />
+                <ScalarProperty Name="ssn" ColumnName="ssn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equips">
+            <EntityTypeMapping TypeName="DB_CLCModel.Equip">
+              <MappingFragment StoreEntitySet="TblEquip">
+                <ScalarProperty Name="equipId" ColumnName="equipId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="fuelType" ColumnName="fuelType" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceRecords1">
+            <EntityTypeMapping TypeName="DB_CLCModel.MaintenanceRecord">
+              <MappingFragment StoreEntitySet="TblMaintRec">
+                <ScalarProperty Name="maintId" ColumnName="maintId" />
+                <ScalarProperty Name="equipId" ColumnName="equipId" />
+                <ScalarProperty Name="maintType" ColumnName="maintType" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="DB_CLCModel.Person">
+              <MappingFragment StoreEntitySet="TblPers">
+                <ScalarProperty Name="perId" ColumnName="perId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="DB_CLCModel.Property">
+              <MappingFragment StoreEntitySet="TblProp">
+                <ScalarProperty Name="propId" ColumnName="propId" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="services" ColumnName="services" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="recurrence" ColumnName="recurrence" />
+                <ScalarProperty Name="nextCut" ColumnName="nextCut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tools">
+            <EntityTypeMapping TypeName="DB_CLCModel.Tool">
+              <MappingFragment StoreEntitySet="TblTool">
+                <ScalarProperty Name="toolId" ColumnName="toolId" />
+                <ScalarProperty Name="equipId" ColumnName="equipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="DB_CLCModel.Vehicle">
+              <MappingFragment StoreEntitySet="TblVehicle">
+                <ScalarProperty Name="vehId" ColumnName="vehId" />
+                <ScalarProperty Name="equipId" ColumnName="equipId" />
+                <ScalarProperty Name="licPlate" ColumnName="licPlate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TblEmpAssigned" TypeName="DB_CLCModel.TblEmpAssigned" StoreEntitySet="TblEmpAssigned">
+            <EndProperty Name="TblPers">
+              <ScalarProperty Name="perId" ColumnName="empId" />
+            </EndProperty>
+            <EndProperty Name="TblEquip">
+              <ScalarProperty Name="equipId" ColumnName="truckId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TblToolAssigned" TypeName="DB_CLCModel.TblToolAssigned" StoreEntitySet="TblToolAssigned">
+            <EndProperty Name="TblEquip">
+              <ScalarProperty Name="equipId" ColumnName="toolId" />
+            </EndProperty>
+            <EndProperty Name="TblEquip1">
+              <ScalarProperty Name="equipId" ColumnName="truckId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TblTruckAssigned" TypeName="DB_CLCModel.TblTruckAssigned" StoreEntitySet="TblTruckAssigned">
+            <EndProperty Name="TblProp">
+              <ScalarProperty Name="propId" ColumnName="propId" />
+            </EndProperty>
+            <EndProperty Name="TblEquip">
+              <ScalarProperty Name="equipId" ColumnName="truckId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TblManages" TypeName="DB_CLCModel.TblManages" StoreEntitySet="TblManages">
+            <EndProperty Name="TblPers">
+              <ScalarProperty Name="perId" ColumnName="empId" />
+            </EndProperty>
+            <EndProperty Name="TblPers1">
+              <ScalarProperty Name="perId" ColumnName="manId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TblOwns" TypeName="DB_CLCModel.TblOwns" StoreEntitySet="TblOwns">
+            <EndProperty Name="TblPers">
+              <ScalarProperty Name="perId" ColumnName="perId" />
+            </EndProperty>
+            <EndProperty Name="TblProp">
+              <ScalarProperty Name="propId" ColumnName="propID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

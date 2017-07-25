@@ -12,13 +12,13 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class VehiclesController : Controller
     {
-        private DBCLC db = new DBCLC();
+        private DB_CLCEntities db = new DB_CLCEntities();
 
         // GET: Vehicles
         public ActionResult Index()
         {
-            var tblVehicles = db.TblVehicles.Include(v => v.TblEquip);
-            return View(tblVehicles.ToList());
+            var vehicles = db.Vehicles.Include(v => v.TblEquip);
+            return View(vehicles.ToList());
         }
 
         // GET: Vehicles/Details/5
@@ -28,18 +28,18 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicles vehicles = db.TblVehicles.Find(id);
-            if (vehicles == null)
+            Vehicle vehicle = db.Vehicles.Find(id);
+            if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicles);
+            return View(vehicle);
         }
 
         // GET: Vehicles/Create
         public ActionResult Create()
         {
-            ViewBag.equpId = new SelectList(db.TblEquips, "equipId", "name");
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name");
             return View();
         }
 
@@ -48,17 +48,17 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "vehId,equpId,licPlate")] Vehicles vehicles)
+        public ActionResult Create([Bind(Include = "vehId,equipId,licPlate")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
-                db.TblVehicles.Add(vehicles);
+                db.Vehicles.Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.equpId = new SelectList(db.TblEquips, "equipId", "name", vehicles.equpId);
-            return View(vehicles);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", vehicle.equipId);
+            return View(vehicle);
         }
 
         // GET: Vehicles/Edit/5
@@ -68,13 +68,13 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicles vehicles = db.TblVehicles.Find(id);
-            if (vehicles == null)
+            Vehicle vehicle = db.Vehicles.Find(id);
+            if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.equpId = new SelectList(db.TblEquips, "equipId", "name", vehicles.equpId);
-            return View(vehicles);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", vehicle.equipId);
+            return View(vehicle);
         }
 
         // POST: Vehicles/Edit/5
@@ -82,16 +82,16 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "vehId,equpId,licPlate")] Vehicles vehicles)
+        public ActionResult Edit([Bind(Include = "vehId,equipId,licPlate")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicles).State = EntityState.Modified;
+                db.Entry(vehicle).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.equpId = new SelectList(db.TblEquips, "equipId", "name", vehicles.equpId);
-            return View(vehicles);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", vehicle.equipId);
+            return View(vehicle);
         }
 
         // GET: Vehicles/Delete/5
@@ -101,12 +101,12 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicles vehicles = db.TblVehicles.Find(id);
-            if (vehicles == null)
+            Vehicle vehicle = db.Vehicles.Find(id);
+            if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicles);
+            return View(vehicle);
         }
 
         // POST: Vehicles/Delete/5
@@ -114,8 +114,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicles vehicles = db.TblVehicles.Find(id);
-            db.TblVehicles.Remove(vehicles);
+            Vehicle vehicle = db.Vehicles.Find(id);
+            db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

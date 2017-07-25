@@ -12,13 +12,13 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class MaintenanceRecordsController : Controller
     {
-        private DBCLC db = new DBCLC();
+        private DB_CLCEntities db = new DB_CLCEntities();
 
         // GET: MaintenanceRecords
         public ActionResult Index()
         {
-            var tblMaintRecs = db.TblMaintRecs.Include(m => m.TblEquip);
-            return View(tblMaintRecs.ToList());
+            var maintenanceRecords1 = db.MaintenanceRecords1.Include(m => m.TblEquip);
+            return View(maintenanceRecords1.ToList());
         }
 
         // GET: MaintenanceRecords/Details/5
@@ -28,18 +28,18 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MaintenanceRecords maintenanceRecords = db.TblMaintRecs.Find(id);
-            if (maintenanceRecords == null)
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            if (maintenanceRecord == null)
             {
                 return HttpNotFound();
             }
-            return View(maintenanceRecords);
+            return View(maintenanceRecord);
         }
 
         // GET: MaintenanceRecords/Create
         public ActionResult Create()
         {
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name");
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name");
             return View();
         }
 
@@ -48,17 +48,17 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "maintId,equipId,maintType,cost,date")] MaintenanceRecords maintenanceRecords)
+        public ActionResult Create([Bind(Include = "maintId,equipId,maintType,cost,date")] MaintenanceRecord maintenanceRecord)
         {
             if (ModelState.IsValid)
             {
-                db.TblMaintRecs.Add(maintenanceRecords);
+                db.MaintenanceRecords1.Add(maintenanceRecord);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", maintenanceRecords.equipId);
-            return View(maintenanceRecords);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", maintenanceRecord.equipId);
+            return View(maintenanceRecord);
         }
 
         // GET: MaintenanceRecords/Edit/5
@@ -68,13 +68,13 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MaintenanceRecords maintenanceRecords = db.TblMaintRecs.Find(id);
-            if (maintenanceRecords == null)
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            if (maintenanceRecord == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", maintenanceRecords.equipId);
-            return View(maintenanceRecords);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", maintenanceRecord.equipId);
+            return View(maintenanceRecord);
         }
 
         // POST: MaintenanceRecords/Edit/5
@@ -82,16 +82,16 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "maintId,equipId,maintType,cost,date")] MaintenanceRecords maintenanceRecords)
+        public ActionResult Edit([Bind(Include = "maintId,equipId,maintType,cost,date")] MaintenanceRecord maintenanceRecord)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(maintenanceRecords).State = EntityState.Modified;
+                db.Entry(maintenanceRecord).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", maintenanceRecords.equipId);
-            return View(maintenanceRecords);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", maintenanceRecord.equipId);
+            return View(maintenanceRecord);
         }
 
         // GET: MaintenanceRecords/Delete/5
@@ -101,12 +101,12 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MaintenanceRecords maintenanceRecords = db.TblMaintRecs.Find(id);
-            if (maintenanceRecords == null)
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            if (maintenanceRecord == null)
             {
                 return HttpNotFound();
             }
-            return View(maintenanceRecords);
+            return View(maintenanceRecord);
         }
 
         // POST: MaintenanceRecords/Delete/5
@@ -114,8 +114,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MaintenanceRecords maintenanceRecords = db.TblMaintRecs.Find(id);
-            db.TblMaintRecs.Remove(maintenanceRecords);
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            db.MaintenanceRecords1.Remove(maintenanceRecord);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

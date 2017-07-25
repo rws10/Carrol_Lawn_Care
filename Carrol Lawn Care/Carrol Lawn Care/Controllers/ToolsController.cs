@@ -12,13 +12,13 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class ToolsController : Controller
     {
-        private DBCLC db = new DBCLC();
+        private DB_CLCEntities db = new DB_CLCEntities();
 
         // GET: Tools
         public ActionResult Index()
         {
-            var tblTools = db.TblTools.Include(t => t.TblEquip);
-            return View(tblTools.ToList());
+            var tools = db.Tools.Include(t => t.TblEquip);
+            return View(tools.ToList());
         }
 
         // GET: Tools/Details/5
@@ -28,18 +28,18 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tools tools = db.TblTools.Find(id);
-            if (tools == null)
+            Tool tool = db.Tools.Find(id);
+            if (tool == null)
             {
                 return HttpNotFound();
             }
-            return View(tools);
+            return View(tool);
         }
 
         // GET: Tools/Create
         public ActionResult Create()
         {
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name");
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name");
             return View();
         }
 
@@ -48,17 +48,17 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "toolId,equipId")] Tools tools)
+        public ActionResult Create([Bind(Include = "toolId,equipId")] Tool tool)
         {
             if (ModelState.IsValid)
             {
-                db.TblTools.Add(tools);
+                db.Tools.Add(tool);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", tools.equipId);
-            return View(tools);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", tool.equipId);
+            return View(tool);
         }
 
         // GET: Tools/Edit/5
@@ -68,13 +68,13 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tools tools = db.TblTools.Find(id);
-            if (tools == null)
+            Tool tool = db.Tools.Find(id);
+            if (tool == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", tools.equipId);
-            return View(tools);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", tool.equipId);
+            return View(tool);
         }
 
         // POST: Tools/Edit/5
@@ -82,16 +82,16 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "toolId,equipId")] Tools tools)
+        public ActionResult Edit([Bind(Include = "toolId,equipId")] Tool tool)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tools).State = EntityState.Modified;
+                db.Entry(tool).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.equipId = new SelectList(db.TblEquips, "equipId", "name", tools.equipId);
-            return View(tools);
+            ViewBag.equipId = new SelectList(db.Equips, "equipId", "name", tool.equipId);
+            return View(tool);
         }
 
         // GET: Tools/Delete/5
@@ -101,12 +101,12 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tools tools = db.TblTools.Find(id);
-            if (tools == null)
+            Tool tool = db.Tools.Find(id);
+            if (tool == null)
             {
                 return HttpNotFound();
             }
-            return View(tools);
+            return View(tool);
         }
 
         // POST: Tools/Delete/5
@@ -114,8 +114,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tools tools = db.TblTools.Find(id);
-            db.TblTools.Remove(tools);
+            Tool tool = db.Tools.Find(id);
+            db.Tools.Remove(tool);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

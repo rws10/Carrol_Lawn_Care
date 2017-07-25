@@ -1,4 +1,4 @@
-﻿@model Carrol_Lawn_Care.Models.MaintenanceRecords
+﻿@model Carrol_Lawn_Care.Models.MaintenanceRecord
 
 @{
     ViewBag.Title = "Details";
@@ -8,17 +8,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>MaintenanceRecords</h4>
+    <h4>MaintenanceRecord</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TblEquip.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TblEquip.name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.maintType)
         </dt>
@@ -41,6 +33,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TblEquip.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TblEquip.name)
         </dd>
 
     </dl>

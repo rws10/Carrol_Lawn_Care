@@ -1,4 +1,4 @@
-﻿@model IPagedList<Carrol_Lawn_Care.Models.TblProp>   
+﻿@model IPagedList<Carrol_Lawn_Care.Models.Property>   
 @using X.PagedList.Mvc;
 @using X.PagedList;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -10,9 +10,11 @@
     <h1>Carrol Lawn Care</h1>
     <p class="lead">Below is a list of properties that are to be done today..</p>
 </div>
+@{if (!(Model == null))
+    {
+        foreach (var item in Model)
+        {
 
-@foreach (var item in Model)
-{
     <hr>
     <div class="container-fluid">
         <div class="row content">
@@ -21,6 +23,7 @@
             </div>
             </div>
         </div>
-    </div>
     <hr>
-}
+            }
+        }
+    }

@@ -1,4 +1,4 @@
-﻿@model Carrol_Lawn_Care.Models.Customers
+﻿@model Carrol_Lawn_Care.Models.Customer
 
 @{
     ViewBag.Title = "Create";
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Customers</h4>
+        <h4>Customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

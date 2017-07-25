@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Carrol_Lawn_Care.Models.MaintenanceRecords>
+﻿@model IEnumerable<Carrol_Lawn_Care.Models.MaintenanceRecord>
 
 @{
     ViewBag.Title = "Index";
@@ -13,9 +13,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TblEquip.name)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.maintType)
         </th>
         <th>
@@ -24,14 +21,14 @@
         <th>
             @Html.DisplayNameFor(model => model.date)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TblEquip.name)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TblEquip.name)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.maintType)
         </td>
@@ -40,6 +37,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TblEquip.name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.maintId }) |

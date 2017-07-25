@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec92d4272d3540e399ee651df9533916" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_CLCModel.Customer" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Employee" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Equip" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.MaintenanceRecord" Width="1.5" PointX="7.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Person" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Property" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Tool" Width="1.5" PointX="7.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Vehicle" Width="1.5" PointX="7.5" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblCust__perId__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblEmp__perId__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblMaintR__equip__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblTool__equipId__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblVehicl__equpI__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.TblEmpAssigned" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.TblToolAssigned" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.TblTruckAssigned" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.TblManages" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.TblOwns" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

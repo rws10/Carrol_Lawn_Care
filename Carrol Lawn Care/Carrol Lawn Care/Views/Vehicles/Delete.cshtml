@@ -1,4 +1,4 @@
-﻿@model Carrol_Lawn_Care.Models.Vehicles
+﻿@model Carrol_Lawn_Care.Models.Vehicle
 
 @{
     ViewBag.Title = "Delete";
@@ -9,23 +9,23 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Vehicles</h4>
+    <h4>Vehicle</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TblEquip.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TblEquip.name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.licPlate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.licPlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TblEquip.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TblEquip.name)
         </dd>
 
     </dl>

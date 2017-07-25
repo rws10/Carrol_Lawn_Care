@@ -12,13 +12,13 @@ namespace Carrol_Lawn_Care.Controllers
 {
     public class EmployeesController : Controller
     {
-        private DBCLC db = new DBCLC();
+        private DB_CLCEntities db = new DB_CLCEntities();
 
         // GET: Employees
         public ActionResult Index()
         {
-            var tblEmps = db.TblEmps.Include(e => e.TblPer).Include(e => e.TblPer1);
-            return View(tblEmps.ToList());
+            var employees = db.Employees.Include(e => e.TblPer);
+            return View(employees.ToList());
         }
 
         // GET: Employees/Details/5
@@ -28,19 +28,18 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employees employees = db.TblEmps.Find(id);
-            if (employees == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(employees);
+            return View(employee);
         }
 
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.managedBy = new SelectList(db.TblPers, "perId", "name");
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name");
+            ViewBag.perId = new SelectList(db.People, "perId", "name");
             return View();
         }
 
@@ -49,18 +48,17 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "empId,perId,payRate,ssn,managedBy")] Employees employees)
+        public ActionResult Create([Bind(Include = "empId,perId,payRate,ssn")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.TblEmps.Add(employees);
+                db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.managedBy = new SelectList(db.TblPers, "perId", "name", employees.managedBy);
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", employees.perId);
-            return View(employees);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", employee.perId);
+            return View(employee);
         }
 
         // GET: Employees/Edit/5
@@ -70,14 +68,13 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employees employees = db.TblEmps.Find(id);
-            if (employees == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.managedBy = new SelectList(db.TblPers, "perId", "name", employees.managedBy);
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", employees.perId);
-            return View(employees);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", employee.perId);
+            return View(employee);
         }
 
         // POST: Employees/Edit/5
@@ -85,17 +82,16 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "empId,perId,payRate,ssn,managedBy")] Employees employees)
+        public ActionResult Edit([Bind(Include = "empId,perId,payRate,ssn")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employees).State = EntityState.Modified;
+                db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.managedBy = new SelectList(db.TblPers, "perId", "name", employees.managedBy);
-            ViewBag.perId = new SelectList(db.TblPers, "perId", "name", employees.perId);
-            return View(employees);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", employee.perId);
+            return View(employee);
         }
 
         // GET: Employees/Delete/5
@@ -105,12 +101,12 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employees employees = db.TblEmps.Find(id);
-            if (employees == null)
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
             {
                 return HttpNotFound();
             }
-            return View(employees);
+            return View(employee);
         }
 
         // POST: Employees/Delete/5
@@ -118,8 +114,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employees employees = db.TblEmps.Find(id);
-            db.TblEmps.Remove(employees);
+            Employee employee = db.Employees.Find(id);
+            db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
