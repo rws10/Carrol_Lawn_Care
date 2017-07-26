@@ -17,8 +17,8 @@ namespace Carrol_Lawn_Care.Controllers
         // GET: MaintenanceRecords
         public ActionResult Index()
         {
-            var maintenanceRecords1 = db.MaintenanceRecords1.Include(m => m.TblEquip);
-            return View(maintenanceRecords1.ToList());
+            var maintenanceRecords = db.MaintenanceRecords.Include(m => m.TblEquip);
+            return View(maintenanceRecords.ToList());
         }
 
         // GET: MaintenanceRecords/Details/5
@@ -28,7 +28,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords.Find(id);
             if (maintenanceRecord == null)
             {
                 return HttpNotFound();
@@ -52,7 +52,7 @@ namespace Carrol_Lawn_Care.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.MaintenanceRecords1.Add(maintenanceRecord);
+                db.MaintenanceRecords.Add(maintenanceRecord);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -68,7 +68,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords.Find(id);
             if (maintenanceRecord == null)
             {
                 return HttpNotFound();
@@ -101,7 +101,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords.Find(id);
             if (maintenanceRecord == null)
             {
                 return HttpNotFound();
@@ -114,8 +114,8 @@ namespace Carrol_Lawn_Care.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords1.Find(id);
-            db.MaintenanceRecords1.Remove(maintenanceRecord);
+            MaintenanceRecord maintenanceRecord = db.MaintenanceRecords.Find(id);
+            db.MaintenanceRecords.Remove(maintenanceRecord);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

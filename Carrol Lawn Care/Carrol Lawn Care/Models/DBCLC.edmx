@@ -47,25 +47,20 @@
           <Property Name="cost" Type="real" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_CLC.dbo.TblManages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TblManages">
           <Key>
-            <PropertyRef Name="manId" />
             <PropertyRef Name="empId" />
           </Key>
-          <Property Name="manId" Type="int" Nullable="false" />
           <Property Name="empId" Type="int" Nullable="false" />
+          <Property Name="manId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TblOwns">
           <Key>
-            <PropertyRef Name="perId" />
-            <PropertyRef Name="propID" />
+            <PropertyRef Name="ownId" />
           </Key>
+          <Property Name="ownId" Type="int" Nullable="false" />
           <Property Name="perId" Type="int" Nullable="false" />
-          <Property Name="propID" Type="int" Nullable="false" />
+          <Property Name="propId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TblPers">
           <Key>
@@ -136,7 +131,7 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
               <PropertyRef Name="propId" />
             </Principal>
             <Dependent Role="TblOwns">
-              <PropertyRef Name="propID" />
+              <PropertyRef Name="propId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,7 +197,7 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
         </Association>
         <Association Name="FK__TblManage__empId__22AA2996">
           <End Role="TblPers" Type="Self.TblPers" Multiplicity="1" />
-          <End Role="TblManages" Type="Self.TblManages" Multiplicity="*" />
+          <End Role="TblManages" Type="Self.TblManages" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="TblPers">
               <PropertyRef Name="perId" />
@@ -302,24 +297,14 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <EntitySet Name="TblEmpAssigned" EntityType="Self.TblEmpAssigned" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEquip" EntityType="Self.TblEquip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblMaintRec" EntityType="Self.TblMaintRec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblManages" EntityType="Self.TblManages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblOwns" EntityType="Self.TblOwns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblPers" EntityType="Self.TblPers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblProp" EntityType="Self.TblProp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblTool" EntityType="Self.TblTool" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblToolAssigned" EntityType="Self.TblToolAssigned" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblTruckAssigned" EntityType="Self.TblTruckAssigned" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblVehicle" EntityType="Self.TblVehicle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TblManages" EntityType="Self.TblManages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TblManages].[manId] AS [manId], 
-    [TblManages].[empId] AS [empId]
-    FROM [dbo].[TblManages] AS [TblManages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TblOwns" EntityType="Self.TblOwns" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TblOwns].[perId] AS [perId], 
-    [TblOwns].[propID] AS [propID]
-    FROM [dbo].[TblOwns] AS [TblOwns]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Owns__perId__34C8D9D1" Association="Self.FK__Owns__perId__34C8D9D1">
             <End Role="TblPers" EntitySet="TblPers" />
             <End Role="TblOwns" EntitySet="TblOwns" />
@@ -431,6 +416,16 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="TblEquip" Relationship="Self.FK__TblMaintR__equip__276EDEB3" FromRole="TblMaintRec" ToRole="TblEquip" />
         </EntityType>
+        <EntityType Name="Own">
+          <Key>
+            <PropertyRef Name="ownId" />
+          </Key>
+          <Property Name="ownId" Type="Int32" Nullable="false" />
+          <Property Name="perId" Type="Int32" Nullable="false" />
+          <Property Name="propId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TblPer" Relationship="Self.FK__Owns__perId__34C8D9D1" FromRole="TblOwns" ToRole="TblPers" />
+          <NavigationProperty Name="TblProp" Relationship="Self.FK__Owns__propID__35BCFE0A" FromRole="TblOwns" ToRole="TblProp" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="perId" />
@@ -441,10 +436,10 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <Property Name="address" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="TblCusts" Relationship="Self.FK__TblCust__perId__1FCDBCEB" FromRole="TblPers" ToRole="TblCust" />
           <NavigationProperty Name="TblEmps" Relationship="Self.FK__TblEmp__perId__1A14E395" FromRole="TblPers" ToRole="TblEmp" />
+          <NavigationProperty Name="TblOwns" Relationship="Self.FK__Owns__perId__34C8D9D1" FromRole="TblPers" ToRole="TblOwns" />
           <NavigationProperty Name="TblEquip" Relationship="Self.TblEmpAssigned" FromRole="TblPers" ToRole="TblEquip" />
           <NavigationProperty Name="TblPers1" Relationship="Self.TblManages" FromRole="TblPers" ToRole="TblPers1" />
           <NavigationProperty Name="TblPers" Relationship="Self.TblManages" FromRole="TblPers1" ToRole="TblPers" />
-          <NavigationProperty Name="TblProps" Relationship="Self.TblOwns" FromRole="TblPers" ToRole="TblProp" />
         </EntityType>
         <EntityType Name="Property">
           <Key>
@@ -456,8 +451,8 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <Property Name="cost" Type="Single" Nullable="false" />
           <Property Name="recurrence" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nextCut" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblOwns" Relationship="Self.FK__Owns__propID__35BCFE0A" FromRole="TblProp" ToRole="TblOwns" />
           <NavigationProperty Name="TblEquip" Relationship="Self.TblTruckAssigned" FromRole="TblProp" ToRole="TblEquip" />
-          <NavigationProperty Name="TblPers" Relationship="Self.TblOwns" FromRole="TblProp" ToRole="TblPers" />
         </EntityType>
         <EntityType Name="Tool">
           <Key>
@@ -536,9 +531,37 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Owns__perId__34C8D9D1">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="1" />
+          <End Role="TblOwns" Type="DB_CLCModel.Own" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblPers">
+              <PropertyRef Name="perId" />
+            </Principal>
+            <Dependent Role="TblOwns">
+              <PropertyRef Name="perId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Owns__propID__35BCFE0A">
+          <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="1" />
+          <End Role="TblOwns" Type="DB_CLCModel.Own" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProp">
+              <PropertyRef Name="propId" />
+            </Principal>
+            <Dependent Role="TblOwns">
+              <PropertyRef Name="propId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TblEmpAssigned">
           <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
           <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
+        </Association>
+        <Association Name="TblManages">
+          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
+          <End Role="TblPers1" Type="DB_CLCModel.Person" Multiplicity="0..1" />
         </Association>
         <Association Name="TblToolAssigned">
           <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="*" />
@@ -548,19 +571,12 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="*" />
           <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
         </Association>
-        <Association Name="TblManages">
-          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
-          <End Role="TblPers1" Type="DB_CLCModel.Person" Multiplicity="*" />
-        </Association>
-        <Association Name="TblOwns">
-          <End Role="TblPers" Type="DB_CLCModel.Person" Multiplicity="*" />
-          <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="DB_CLCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="DB_CLCModel.Customer" />
           <EntitySet Name="Employees" EntityType="DB_CLCModel.Employee" />
           <EntitySet Name="Equips" EntityType="DB_CLCModel.Equip" />
-          <EntitySet Name="MaintenanceRecords1" EntityType="DB_CLCModel.MaintenanceRecord" />
+          <EntitySet Name="MaintenanceRecords" EntityType="DB_CLCModel.MaintenanceRecord" />
+          <EntitySet Name="Owns" EntityType="DB_CLCModel.Own" />
           <EntitySet Name="People" EntityType="DB_CLCModel.Person" />
           <EntitySet Name="Properties" EntityType="DB_CLCModel.Property" />
           <EntitySet Name="Tools" EntityType="DB_CLCModel.Tool" />
@@ -575,7 +591,7 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           </AssociationSet>
           <AssociationSet Name="FK__TblMaintR__equip__276EDEB3" Association="Self.FK__TblMaintR__equip__276EDEB3">
             <End Role="TblEquip" EntitySet="Equips" />
-            <End Role="TblMaintRec" EntitySet="MaintenanceRecords1" />
+            <End Role="TblMaintRec" EntitySet="MaintenanceRecords" />
           </AssociationSet>
           <AssociationSet Name="FK__TblTool__equipId__6E01572D" Association="Self.FK__TblTool__equipId__6E01572D">
             <End Role="TblEquip" EntitySet="Equips" />
@@ -585,9 +601,21 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
             <End Role="TblEquip" EntitySet="Equips" />
             <End Role="TblVehicle" EntitySet="Vehicles" />
           </AssociationSet>
+          <AssociationSet Name="FK__Owns__perId__34C8D9D1" Association="Self.FK__Owns__perId__34C8D9D1">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblOwns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Owns__propID__35BCFE0A" Association="Self.FK__Owns__propID__35BCFE0A">
+            <End Role="TblProp" EntitySet="Properties" />
+            <End Role="TblOwns" EntitySet="Owns" />
+          </AssociationSet>
           <AssociationSet Name="TblEmpAssigned" Association="Self.TblEmpAssigned">
             <End Role="TblPers" EntitySet="People" />
             <End Role="TblEquip" EntitySet="Equips" />
+          </AssociationSet>
+          <AssociationSet Name="TblManages" Association="Self.TblManages">
+            <End Role="TblPers" EntitySet="People" />
+            <End Role="TblPers1" EntitySet="People" />
           </AssociationSet>
           <AssociationSet Name="TblToolAssigned" Association="Self.TblToolAssigned">
             <End Role="TblEquip" EntitySet="Equips" />
@@ -596,14 +624,6 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
           <AssociationSet Name="TblTruckAssigned" Association="Self.TblTruckAssigned">
             <End Role="TblProp" EntitySet="Properties" />
             <End Role="TblEquip" EntitySet="Equips" />
-          </AssociationSet>
-          <AssociationSet Name="TblManages" Association="Self.TblManages">
-            <End Role="TblPers" EntitySet="People" />
-            <End Role="TblPers1" EntitySet="People" />
-          </AssociationSet>
-          <AssociationSet Name="TblOwns" Association="Self.TblOwns">
-            <End Role="TblPers" EntitySet="People" />
-            <End Role="TblProp" EntitySet="Properties" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -640,7 +660,7 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MaintenanceRecords1">
+          <EntitySetMapping Name="MaintenanceRecords">
             <EntityTypeMapping TypeName="DB_CLCModel.MaintenanceRecord">
               <MappingFragment StoreEntitySet="TblMaintRec">
                 <ScalarProperty Name="maintId" ColumnName="maintId" />
@@ -648,6 +668,15 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
                 <ScalarProperty Name="maintType" ColumnName="maintType" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
                 <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owns">
+            <EntityTypeMapping TypeName="DB_CLCModel.Own">
+              <MappingFragment StoreEntitySet="TblOwns">
+                <ScalarProperty Name="ownId" ColumnName="ownId" />
+                <ScalarProperty Name="perId" ColumnName="perId" />
+                <ScalarProperty Name="propId" ColumnName="propId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -698,6 +727,14 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
               <ScalarProperty Name="equipId" ColumnName="truckId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="TblManages" TypeName="DB_CLCModel.TblManages" StoreEntitySet="TblManages">
+            <EndProperty Name="TblPers">
+              <ScalarProperty Name="perId" ColumnName="empId" />
+            </EndProperty>
+            <EndProperty Name="TblPers1">
+              <ScalarProperty Name="perId" ColumnName="manId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="TblToolAssigned" TypeName="DB_CLCModel.TblToolAssigned" StoreEntitySet="TblToolAssigned">
             <EndProperty Name="TblEquip">
               <ScalarProperty Name="equipId" ColumnName="toolId" />
@@ -712,22 +749,6 @@ warning 6002: The table/view 'DB_CLC.dbo.TblOwns' does not have a primary key de
             </EndProperty>
             <EndProperty Name="TblEquip">
               <ScalarProperty Name="equipId" ColumnName="truckId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="TblManages" TypeName="DB_CLCModel.TblManages" StoreEntitySet="TblManages">
-            <EndProperty Name="TblPers">
-              <ScalarProperty Name="perId" ColumnName="empId" />
-            </EndProperty>
-            <EndProperty Name="TblPers1">
-              <ScalarProperty Name="perId" ColumnName="manId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="TblOwns" TypeName="DB_CLCModel.TblOwns" StoreEntitySet="TblOwns">
-            <EndProperty Name="TblPers">
-              <ScalarProperty Name="perId" ColumnName="perId" />
-            </EndProperty>
-            <EndProperty Name="TblProp">
-              <ScalarProperty Name="propId" ColumnName="propID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

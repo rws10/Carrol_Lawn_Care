@@ -19,9 +19,8 @@ namespace Carrol_Lawn_Care.Models
         {
             this.TblCusts = new HashSet<Customer>();
             this.TblEmps = new HashSet<Employee>();
-            this.TblPers1 = new HashSet<Person>();
+            this.TblOwns = new HashSet<Own>();
             this.TblPers = new HashSet<Person>();
-            this.TblProps = new HashSet<Property>();
         }
     
         public int perId { get; set; }
@@ -33,12 +32,11 @@ namespace Carrol_Lawn_Care.Models
         public virtual ICollection<Customer> TblCusts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> TblEmps { get; set; }
-        public virtual Equip TblEquip { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> TblPers1 { get; set; }
+        public virtual ICollection<Own> TblOwns { get; set; }
+        public virtual Equip TblEquip { get; set; }
+        public virtual Person TblPers1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Person> TblPers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Property> TblProps { get; set; }
     }
 }

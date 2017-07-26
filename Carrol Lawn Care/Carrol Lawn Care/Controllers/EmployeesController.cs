@@ -33,7 +33,6 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return HttpNotFound();
             }
-           
             return View(employee);
         }
 
@@ -74,7 +73,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.perId = new SelectList(db.People, "perId", "name", "address", employee.perId);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", employee.perId);
             return View(employee);
         }
 
@@ -83,7 +82,7 @@ namespace Carrol_Lawn_Care.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "empId,perId,payRate,ssn,address")] Employee employee)
+        public ActionResult Edit([Bind(Include = "empId,perId,payRate,ssn")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +90,7 @@ namespace Carrol_Lawn_Care.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.perId = new SelectList(db.People, "perId", "name", "address", employee.perId);
+            ViewBag.perId = new SelectList(db.People, "perId", "name", employee.perId);
             return View(employee);
         }
 
