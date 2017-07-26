@@ -24,11 +24,29 @@ namespace Carrol_Lawn_Care.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
+            List<Property> props = new List<Property>();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
+            
+
+            foreach (var item in db.Owns)
+            {
+                if (item.perId == customer.perId)
+                {
+                    List<Property> prop = db.Properties.Where(p => p.propId.Equals(item.propId)).ToList();
+
+                    foreach (var items in prop)
+                    {
+                        props.Add(items);
+                    }
+                } 
+            }
+
+            ViewBag.properties = props;
+
             if (customer == null)
             {
                 return HttpNotFound();

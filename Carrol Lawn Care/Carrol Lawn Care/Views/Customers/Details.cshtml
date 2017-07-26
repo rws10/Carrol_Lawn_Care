@@ -10,6 +10,7 @@
 <div>
     <h4>Customer</h4>
     <hr />
+    <h5>Personal Information: </h5>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.TblPer.name)
@@ -18,8 +19,33 @@
         <dd>
             @Html.DisplayFor(model => model.TblPer.name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TblPer.phone)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.TblPer.phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TblPer.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TblPer.address)
+        </dd>
     </dl>
+    <br />
+    <h5>Owned Properties:</h5>
+
+    @{foreach (var prop in (IEnumerable<Carrol_Lawn_Care.Models.Property>)ViewBag.properties)
+        {
+            <dl class="dl-horizontal">
+                <dd>
+                    @Html.ActionLink(@Html.DisplayName(prop.address).ToString(),"Details", "Properties", prop.propId)
+                </dd>
+            </dl>
+        }
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.custId }) |
