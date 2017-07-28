@@ -22,7 +22,7 @@ namespace Carrol_Lawn_Care.Models
             this.TblVehicles = new HashSet<Vehicle>();
             this.TblPers = new HashSet<Person>();
             this.TblEquips = new HashSet<Equip>();
-            this.TblProps = new HashSet<Property>();
+            this.TblProps = new HashSet<Prop>();
         }
     
         public int equipId { get; set; }
@@ -42,6 +42,6 @@ namespace Carrol_Lawn_Care.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equip> TblEquips { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Property> TblProps { get; set; }
+        public virtual ICollection<Prop> TblProps { get; set; }
     }
 }

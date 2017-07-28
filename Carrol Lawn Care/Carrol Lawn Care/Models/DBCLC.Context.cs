@@ -31,7 +31,7 @@ namespace Carrol_Lawn_Care.Models
         public virtual DbSet<MaintenanceRecord> MaintenanceRecords { get; set; }
         public virtual DbSet<Own> Owns { get; set; }
         public virtual DbSet<Person> People { get; set; }
-        public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<Prop> Props { get; set; }
         public virtual DbSet<Tool> Tools { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
     }

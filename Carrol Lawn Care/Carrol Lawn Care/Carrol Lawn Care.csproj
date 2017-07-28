@@ -199,7 +199,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceRecordsController.cs" />
-    <Compile Include="Controllers\PropertiesController.cs" />
+    <Compile Include="Controllers\PropsController.cs" />
     <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,10 +243,10 @@
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PersonHelper.cs" />
-    <Compile Include="Models\Property.cs">
+    <Compile Include="Models\Prop.cs">
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PropertyHelper.cs" />
+    <Compile Include="Models\PropHelper.cs" />
     <Compile Include="Models\Tool.cs">
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
@@ -351,11 +351,6 @@
     <Content Include="Views\MaintenanceRecords\Details.cshtml" />
     <Content Include="Views\MaintenanceRecords\Edit.cshtml" />
     <Content Include="Views\MaintenanceRecords\Index.cshtml" />
-    <Content Include="Views\Properties\Create.cshtml" />
-    <Content Include="Views\Properties\Delete.cshtml" />
-    <Content Include="Views\Properties\Details.cshtml" />
-    <Content Include="Views\Properties\Edit.cshtml" />
-    <Content Include="Views\Properties\Index.cshtml" />
     <Content Include="Views\Tools\Create.cshtml" />
     <Content Include="Views\Tools\Delete.cshtml" />
     <Content Include="Views\Tools\Details.cshtml" />
@@ -369,6 +364,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Props\Create.cshtml" />
+    <Content Include="Views\Props\Delete.cshtml" />
+    <Content Include="Views\Props\Details.cshtml" />
+    <Content Include="Views\Props\Edit.cshtml" />
+    <Content Include="Views\Props\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

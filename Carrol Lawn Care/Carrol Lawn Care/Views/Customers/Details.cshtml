@@ -37,11 +37,11 @@
     <br />
     <h5>Owned Properties:</h5>
 
-    @{foreach (var prop in (IEnumerable<Carrol_Lawn_Care.Models.Property>)ViewBag.properties)
+    @{foreach (var prop in (IEnumerable<Carrol_Lawn_Care.Models.Prop>)ViewBag.properties)
         {
             <dl class="dl-horizontal">
                 <dd>
-                    @Html.ActionLink(@Html.DisplayName(prop.address).ToString(),"Details", "Properties", prop.propId)
+                    @Html.ActionLink(@Html.DisplayName(prop.address).ToString(),"Details", "Props", new { id = prop.propId }, null)
                 </dd>
             </dl>
         }

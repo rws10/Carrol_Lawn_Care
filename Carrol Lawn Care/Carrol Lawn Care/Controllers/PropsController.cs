@@ -10,107 +10,108 @@ using Carrol_Lawn_Care.Models;
 
 namespace Carrol_Lawn_Care.Controllers
 {
-    public class PropertiesController : Controller
+    public class PropsController : Controller
     {
         private DB_CLCEntities db = new DB_CLCEntities();
 
-        // GET: Properties
+        // GET: Props
         public ActionResult Index()
         {
-            return View(db.Properties.ToList());
+            return View(db.Props.ToList());
         }
 
-        // GET: Properties/Details/5
+        // GET: Props/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Properties.Find(id);
-            if (property == null)
+            Prop prop = db.Props.Find(id);
+            if (prop == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+            prop.nextCut.
+            return View(prop);
         }
 
-        // GET: Properties/Create
+        // GET: Props/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Properties/Create
+        // POST: Props/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "propId,address,services,cost,recurrence,nextCut")] Property property)
+        public ActionResult Create([Bind(Include = "propId,address,services,cost,recurrence,nextCut")] Prop prop)
         {
             if (ModelState.IsValid)
             {
-                db.Properties.Add(property);
+                db.Props.Add(prop);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(property);
+            return View(prop);
         }
 
-        // GET: Properties/Edit/5
+        // GET: Props/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Properties.Find(id);
-            if (property == null)
+            Prop prop = db.Props.Find(id);
+            if (prop == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+            return View(prop);
         }
 
-        // POST: Properties/Edit/5
+        // POST: Props/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "propId,address,services,cost,recurrence,nextCut")] Property property)
+        public ActionResult Edit([Bind(Include = "propId,address,services,cost,recurrence,nextCut")] Prop prop)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(property).State = EntityState.Modified;
+                db.Entry(prop).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(property);
+            return View(prop);
         }
 
-        // GET: Properties/Delete/5
+        // GET: Props/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Properties.Find(id);
-            if (property == null)
+            Prop prop = db.Props.Find(id);
+            if (prop == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+            return View(prop);
         }
 
-        // POST: Properties/Delete/5
+        // POST: Props/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Property property = db.Properties.Find(id);
-            db.Properties.Remove(property);
+            Prop prop = db.Props.Find(id);
+            db.Props.Remove(prop);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

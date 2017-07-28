@@ -441,7 +441,7 @@
           <NavigationProperty Name="TblPers1" Relationship="Self.TblManages" FromRole="TblPers" ToRole="TblPers1" />
           <NavigationProperty Name="TblPers" Relationship="Self.TblManages" FromRole="TblPers1" ToRole="TblPers" />
         </EntityType>
-        <EntityType Name="Property">
+        <EntityType Name="Prop">
           <Key>
             <PropertyRef Name="propId" />
           </Key>
@@ -544,7 +544,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Owns__propID__35BCFE0A">
-          <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="1" />
+          <End Role="TblProp" Type="DB_CLCModel.Prop" Multiplicity="1" />
           <End Role="TblOwns" Type="DB_CLCModel.Own" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblProp">
@@ -568,7 +568,7 @@
           <End Role="TblEquip1" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
         </Association>
         <Association Name="TblTruckAssigned">
-          <End Role="TblProp" Type="DB_CLCModel.Property" Multiplicity="*" />
+          <End Role="TblProp" Type="DB_CLCModel.Prop" Multiplicity="*" />
           <End Role="TblEquip" Type="DB_CLCModel.Equip" Multiplicity="0..1" />
         </Association>
         <EntityContainer Name="DB_CLCEntities" annotation:LazyLoadingEnabled="true">
@@ -578,7 +578,7 @@
           <EntitySet Name="MaintenanceRecords" EntityType="DB_CLCModel.MaintenanceRecord" />
           <EntitySet Name="Owns" EntityType="DB_CLCModel.Own" />
           <EntitySet Name="People" EntityType="DB_CLCModel.Person" />
-          <EntitySet Name="Properties" EntityType="DB_CLCModel.Property" />
+          <EntitySet Name="Props" EntityType="DB_CLCModel.Prop" />
           <EntitySet Name="Tools" EntityType="DB_CLCModel.Tool" />
           <EntitySet Name="Vehicles" EntityType="DB_CLCModel.Vehicle" />
           <AssociationSet Name="FK__TblCust__perId__1FCDBCEB" Association="Self.FK__TblCust__perId__1FCDBCEB">
@@ -606,7 +606,7 @@
             <End Role="TblOwns" EntitySet="Owns" />
           </AssociationSet>
           <AssociationSet Name="FK__Owns__propID__35BCFE0A" Association="Self.FK__Owns__propID__35BCFE0A">
-            <End Role="TblProp" EntitySet="Properties" />
+            <End Role="TblProp" EntitySet="Props" />
             <End Role="TblOwns" EntitySet="Owns" />
           </AssociationSet>
           <AssociationSet Name="TblEmpAssigned" Association="Self.TblEmpAssigned">
@@ -622,7 +622,7 @@
             <End Role="TblEquip1" EntitySet="Equips" />
           </AssociationSet>
           <AssociationSet Name="TblTruckAssigned" Association="Self.TblTruckAssigned">
-            <End Role="TblProp" EntitySet="Properties" />
+            <End Role="TblProp" EntitySet="Props" />
             <End Role="TblEquip" EntitySet="Equips" />
           </AssociationSet>
         </EntityContainer>
@@ -690,8 +690,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Properties">
-            <EntityTypeMapping TypeName="DB_CLCModel.Property">
+          <EntitySetMapping Name="Props">
+            <EntityTypeMapping TypeName="DB_CLCModel.Prop">
               <MappingFragment StoreEntitySet="TblProp">
                 <ScalarProperty Name="propId" ColumnName="propId" />
                 <ScalarProperty Name="address" ColumnName="address" />

@@ -12,10 +12,10 @@ namespace Carrol_Lawn_Care.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Property
+    public partial class Prop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Property()
+        public Prop()
         {
             this.TblOwns = new HashSet<Own>();
         }

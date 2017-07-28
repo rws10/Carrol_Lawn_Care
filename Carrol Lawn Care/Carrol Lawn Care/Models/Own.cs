@@ -19,6 +19,6 @@ namespace Carrol_Lawn_Care.Models
         public int propId { get; set; }
     
         public virtual Person TblPer { get; set; }
-        public virtual Property TblProp { get; set; }
+        public virtual Prop TblProp { get; set; }
     }
 }

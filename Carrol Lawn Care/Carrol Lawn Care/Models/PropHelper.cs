@@ -6,10 +6,10 @@ using System.Web;
 
 namespace Carrol_Lawn_Care.Models
 {
-    [MetadataType(typeof(PropertyHelper))]
-    public partial class Property { }
+    [MetadataType(typeof(PropHelper))]
+    public partial class Prop { }
 
-    public class PropertyHelper
+    public class PropHelper
     {
         [Display(Name = "Address")]
         public string address { get; set; }
@@ -24,12 +24,13 @@ namespace Carrol_Lawn_Care.Models
         public string recurrence { get; set; }
 
         [Display(Name = "Next Cut")]
+        [DisplayFormat(DataFormatString = "{MM/DD/YYYY")]
         public Nullable<System.DateTime> nextCut { get; set; }
 
         [Display(Name = "Assigned Truck")]
         public virtual Equip TblEquip { get; set; }
 
         [Display(Name = "Owners")]
-        public virtual ICollection<Person> TblPers { get; set; }
+        public virtual ICollection<Person> TblOwns { get; set; }
     }
 }

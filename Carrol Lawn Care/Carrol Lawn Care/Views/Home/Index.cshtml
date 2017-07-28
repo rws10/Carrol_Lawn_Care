@@ -1,4 +1,4 @@
-﻿@model IPagedList<Carrol_Lawn_Care.Models.Property>   
+﻿@model IList<Carrol_Lawn_Care.Models.Prop>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -15,15 +15,14 @@
         foreach (var item in Model)
         {
 
-    <hr>
-    <div class="container-fluid">
-        <div class="row content">
-            <div class="H4">Created by @Html.DisplayFor(modelItem => item.address) on @Html.DisplayFor(modelItem => item.address)</div>
-            <div class="more">
-            </div>
-            </div>
-        </div>
-    <hr>
+            <hr>
+            <div class="container-fluid">
+                <div class="row content">
+                        <div class="H4">@Html.ActionLink(@Html.DisplayName(item.address).ToString(), "Details", "Props", new { id = item.propId }, null)</div>
+                        <div class="more">
+                        </div>
+                    </div>
+                </div>
             }
         }
     }

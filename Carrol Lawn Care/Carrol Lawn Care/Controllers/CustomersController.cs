@@ -24,7 +24,7 @@ namespace Carrol_Lawn_Care.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
-            List<Property> props = new List<Property>();
+            List<Prop> props = new List<Prop>();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,7 +36,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 if (item.perId == customer.perId)
                 {
-                    List<Property> prop = db.Properties.Where(p => p.propId.Equals(item.propId)).ToList();
+                    List<Prop> prop = db.Props.Where(p => p.propId.Equals(item.propId)).ToList();
 
                     foreach (var items in prop)
                     {
