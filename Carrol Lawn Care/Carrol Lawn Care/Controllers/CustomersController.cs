@@ -24,17 +24,22 @@ namespace Carrol_Lawn_Care.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
-            List<Prop> props = new List<Prop>();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
             
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            List<Prop> props = new List<Prop>();
 
             foreach (var item in db.Owns)
             {
-                if (item.perId == customer.perId)
+                if (item.perId == customer.custId)
                 {
                     List<Prop> prop = db.Props.Where(p => p.propId.Equals(item.propId)).ToList();
 
@@ -42,15 +47,12 @@ namespace Carrol_Lawn_Care.Controllers
                     {
                         props.Add(items);
                     }
-                } 
+                }
             }
 
             ViewBag.properties = props;
 
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
+
             return View(customer);
         }
 

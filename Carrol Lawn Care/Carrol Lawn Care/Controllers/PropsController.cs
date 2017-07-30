@@ -28,11 +28,28 @@ namespace Carrol_Lawn_Care.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Prop prop = db.Props.Find(id);
+
             if (prop == null)
             {
                 return HttpNotFound();
             }
-            
+
+            List<Person> people = new List<Person>();
+
+            foreach (var item in db.Owns)
+            {
+                if (item.propId == prop.propId)
+                {
+                    List<Person> person = db.People.Where(c => c.perId.Equals(item.perId)).ToList();
+
+                    foreach (var items in person)
+                    {
+                        people.Add(items);
+                    }
+                }
+            }
+
+            ViewBag.Owners = people;
             return View(prop);
         }
 
@@ -52,6 +69,13 @@ namespace Carrol_Lawn_Care.Controllers
             if (ModelState.IsValid)
             {
                 db.Props.Add(prop);
+
+                if (prop.nextCut < DateTime.Today)
+                {
+                    TempData["FailureMessage"] = "Date must be today's date or later.";
+                    return View(prop);
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

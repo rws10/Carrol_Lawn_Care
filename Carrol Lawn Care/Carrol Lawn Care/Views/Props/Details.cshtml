@@ -52,6 +52,19 @@
         </dd>
 
     </dl>
+
+    <h5>Property Owners:</h5>
+
+    @{foreach (var person in (IEnumerable<Carrol_Lawn_Care.Models.Person>)ViewBag.Owners)
+        {
+            <dl class="dl-horizontal">
+                <dd>
+                    @Html.ActionLink(@Html.DisplayName(person.name).ToString(), "Details", "Customers", new { id = person.perId }, null)
+                </dd>
+            </dl>
+        }
+    }
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.propId }) |
