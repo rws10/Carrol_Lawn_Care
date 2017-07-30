@@ -1,0 +1,21 @@
+﻿@{
+    string message;
+
+    if (TempData["FailureMessage"] != null)
+    {
+        message = TempData["FailureMessage"] as string;
+
+        <div class="message error-message">
+            <p>@Html.Raw(@message)</p>
+        </div>
+    }
+
+    if (TempData["SuccessMessage"] != null)
+    {
+        message = TempData["SuccessMessage"] as string;
+        
+        <div class="message success-message">
+            <p>@Html.Raw(@message)</p>
+        </div>
+    }
+}

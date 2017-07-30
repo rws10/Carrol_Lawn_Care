@@ -19,7 +19,7 @@ namespace Carrol_Lawn_Care.Models
         {
             this.TblCusts = new HashSet<Customer>();
             this.TblEmps = new HashSet<Employee>();
-            this.TblOwns = new HashSet<Own>();
+            this.TblOwns = new HashSet<Owns>();
             this.TblPers = new HashSet<Person>();
         }
     
@@ -33,7 +33,7 @@ namespace Carrol_Lawn_Care.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> TblEmps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Own> TblOwns { get; set; }
+        public virtual ICollection<Owns> TblOwns { get; set; }
         public virtual Equip TblEquip { get; set; }
         public virtual Person TblPers1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

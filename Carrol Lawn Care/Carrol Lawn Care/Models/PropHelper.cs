@@ -24,7 +24,6 @@ namespace Carrol_Lawn_Care.Models
         public string recurrence { get; set; }
 
         [Display(Name = "Next Cut")]
-        [DisplayFormat(DataFormatString = "{MM/DD/YYYY")]
         public Nullable<System.DateTime> nextCut { get; set; }
 
         [Display(Name = "Assigned Truck")]

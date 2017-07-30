@@ -32,7 +32,7 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return HttpNotFound();
             }
-            prop.nextCut.
+            
             return View(prop);
         }
 
@@ -84,6 +84,13 @@ namespace Carrol_Lawn_Care.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(prop).State = EntityState.Modified;
+
+                if(prop.nextCut < DateTime.Today)
+                {
+                    TempData["FailureMessage"] = "Date must be today's date or later.";
+                    return View(prop);
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

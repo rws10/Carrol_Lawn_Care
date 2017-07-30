@@ -12,7 +12,7 @@ namespace Carrol_Lawn_Care.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Own
+    public partial class Owns
     {
         public int ownId { get; set; }
         public int perId { get; set; }

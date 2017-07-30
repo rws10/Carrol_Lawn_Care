@@ -17,7 +17,7 @@ namespace Carrol_Lawn_Care.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Prop()
         {
-            this.TblOwns = new HashSet<Own>();
+            this.TblOwns = new HashSet<Owns>();
         }
     
         public int propId { get; set; }
@@ -28,7 +28,7 @@ namespace Carrol_Lawn_Care.Models
         public Nullable<System.DateTime> nextCut { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Own> TblOwns { get; set; }
+        public virtual ICollection<Owns> TblOwns { get; set; }
         public virtual Equip TblEquip { get; set; }
     }
 }

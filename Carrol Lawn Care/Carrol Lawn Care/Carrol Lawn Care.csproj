@@ -199,6 +199,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceRecordsController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PropsController.cs" />
     <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -236,7 +237,7 @@
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MaintenanceRecordHelper.cs" />
-    <Compile Include="Models\Own.cs">
+    <Compile Include="Models\Owns.cs">
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Person.cs">
@@ -322,7 +323,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -369,6 +372,7 @@
     <Content Include="Views\Props\Details.cshtml" />
     <Content Include="Views\Props\Edit.cshtml" />
     <Content Include="Views\Props\Index.cshtml" />
+    <Content Include="Views\Message\TempMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

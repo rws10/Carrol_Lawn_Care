@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+ 
+/*Set the error and success messages to specific color and size.*/
+.error-message {
+    color: red;
+}
+
+.success-message {
+    color: green;
+}
+
+.message {
+    font-size: large;
+}
