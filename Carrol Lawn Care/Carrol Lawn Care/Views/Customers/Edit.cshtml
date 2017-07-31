@@ -17,12 +17,36 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.custId)
+        @Html.HiddenFor(model => model.TblPer.perId)
+        @Html.HiddenFor(model => model.TblPer.TblCusts)
+        @Html.HiddenFor(model => model.TblPer.TblEmpAssigneds)
+        @Html.HiddenFor(model => model.TblPer.TblEmps)
+        @Html.HiddenFor(model => model.TblPer.TblManages)
+        @Html.HiddenFor(model => model.TblPer.TblManages1)
+        @Html.HiddenFor(model => model.TblPer.TblOwns)
 
         <div class="form-group">
             @Html.LabelFor(model => model.TblPer.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TblPer.name)
                 @Html.ValidationMessageFor(model => model.TblPer.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Please enter the phone number with only digits. No spaces and no non digit characters.
+            @Html.LabelFor(model => model.TblPer.phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TblPer.phone)
+                @Html.ValidationMessageFor(model => model.TblPer.phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TblPer.address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TblPer.address)
+                @Html.ValidationMessageFor(model => model.TblPer.address, "", new { @class = "text-danger" })
             </div>
         </div>
 
