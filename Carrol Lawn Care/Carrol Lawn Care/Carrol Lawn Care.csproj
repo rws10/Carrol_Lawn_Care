@@ -206,6 +206,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignedEmp.cs">
+      <DependentUpon>DBCLC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssignedTool.cs">
+      <DependentUpon>DBCLC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssignedTruck.cs">
+      <DependentUpon>DBCLC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
@@ -237,6 +246,9 @@
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MaintenanceRecordHelper.cs" />
+    <Compile Include="Models\Manage.cs">
+      <DependentUpon>DBCLC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Owns.cs">
       <DependentUpon>DBCLC.tt</DependentUpon>
     </Compile>

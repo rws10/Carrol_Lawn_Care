@@ -4,27 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c9f9a4f409cb4d8f94b16c7353d3d599" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_CLCModel.Customer" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Employee" Width="1.5" PointX="6" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Equip" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.MaintenanceRecord" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Owns" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Person" Width="1.5" PointX="3.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Prop" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Tool" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_CLCModel.Vehicle" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+      <Diagram DiagramId="9a4c689d4b314a5da7ae8b0b0a3358f3" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_CLCModel.Customer" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Employee" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.AssignedEmp" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Equip" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.MaintenanceRecord" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Manage" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Owns" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Person" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Prop" Width="1.5" PointX="3.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Tool" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.AssignedTool" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.AssignedTruck" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_CLCModel.Vehicle" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
         <AssociationConnector Association="DB_CLCModel.FK__TblCust__perId__1FCDBCEB" ManuallyRouted="false" />
         <AssociationConnector Association="DB_CLCModel.FK__TblEmp__perId__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblEmpAss__empId__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblEmpAss__truck__656C112C" ManuallyRouted="false" />
         <AssociationConnector Association="DB_CLCModel.FK__TblMaintR__equip__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="DB_CLCModel.FK__TblTool__equipId__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblToolAs__toolI__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblToolAs__truck__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblTruckA__truck__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="DB_CLCModel.FK__TblVehicl__equip__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblManage__empId__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblManage__manId__68487DD7" ManuallyRouted="false" />
         <AssociationConnector Association="DB_CLCModel.FK__Owns__perId__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="DB_CLCModel.FK__Owns__propID__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_CLCModel.TblEmpAssigned" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_CLCModel.TblManages" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_CLCModel.TblToolAssigned" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_CLCModel.TblTruckAssigned" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_CLCModel.FK__TblTruckA__propI__5CD6CB2B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

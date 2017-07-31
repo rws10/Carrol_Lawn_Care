@@ -33,6 +33,24 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return HttpNotFound();
             }
+
+            List<Vehicle> vehicles = new List<Vehicle>();
+
+            foreach (var item in db.AssignedEmps)
+            {
+                if (item.empId == employee.empId)
+                {
+                    List<Vehicle> vehicle = db.Vehicles.Where(c => c.vehId.Equals(item.truckId)).ToList();
+
+                    foreach (var items in vehicle)
+                    {
+                        vehicles.Add(items);
+                    }
+                }
+            }
+
+            ViewBag.Truck = vehicles;
+
             return View(employee);
         }
 

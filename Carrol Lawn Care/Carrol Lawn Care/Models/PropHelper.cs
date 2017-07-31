@@ -26,8 +26,8 @@ namespace Carrol_Lawn_Care.Models
         [Display(Name = "Next Cut")]
         public Nullable<System.DateTime> nextCut { get; set; }
 
-        [Display(Name = "Assigned Truck")]
-        public virtual Equip TblEquip { get; set; }
+        //[Display(Name = "Assigned Truck")]
+        //public virtual Equip TblEquip { get; set; }
 
         [Display(Name = "Owners")]
         public virtual ICollection<Person> TblOwns { get; set; }

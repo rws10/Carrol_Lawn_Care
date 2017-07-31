@@ -11,12 +11,15 @@ namespace Carrol_Lawn_Care.Models
 
     public class PersonHelper
     {
+        [Required(ErrorMessage = "Name required")]
         [Display(Name = "Name")]
         public string name { get; set; }
 
+        [Required(ErrorMessage = "Phone number required")]
         [Display(Name = "Phone Number")]
         public string phone { get; set; }
 
+        [Required(ErrorMessage = "Address required")]
         [Display(Name = "Address")]
         public string address { get; set; }
     }

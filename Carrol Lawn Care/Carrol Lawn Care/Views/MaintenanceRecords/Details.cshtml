@@ -24,7 +24,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.cost)
+            $@Html.DisplayFor(model => model.cost)
         </dd>
 
         <dt>
@@ -39,8 +39,30 @@
             @Html.DisplayNameFor(model => model.TblEquip.name)
         </dt>
 
+
         <dd>
-            @Html.DisplayFor(model => model.TblEquip.name)
+
+            @{
+                if (ViewBag.equipType[1] == "vehicle")
+                {
+
+                    @Html.ActionLink(@Html.DisplayFor(model => model.TblEquip.name).ToString(), "Details", "Vehicles", new { id = Int32.Parse(ViewBag.equipType[0])}, null)
+                }
+                else
+                {
+                    @Html.ActionLink(@Html.DisplayFor(model => model.TblEquip.name).ToString(), "Details", "Tools", new { id = Int32.Parse(ViewBag.equipType[0]) }, null)
+                }
+            }
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
         </dd>
 
     </dl>

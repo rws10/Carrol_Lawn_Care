@@ -49,6 +49,22 @@ namespace Carrol_Lawn_Care.Controllers
                 }
             }
 
+            List<Vehicle> vehicles = new List<Vehicle>();
+
+            foreach (var item in db.AssignedTrucks)
+            {
+                if (item.propId == prop.propId)
+                {
+                    List<Vehicle> vehicle = db.Vehicles.Where(c => c.vehId.Equals(item.truckId)).ToList();
+
+                    foreach (var items in vehicle)
+                    {
+                        vehicles.Add(items);
+                    }
+                }
+            }
+
+            ViewBag.Truck = vehicles;
             ViewBag.Owners = people;
             return View(prop);
         }

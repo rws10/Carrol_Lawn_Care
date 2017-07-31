@@ -33,6 +33,67 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return HttpNotFound();
             }
+
+            List<Prop> props = new List<Prop>();
+
+            foreach (var item in db.AssignedTrucks)
+            {
+                if (item.truckId == vehicle.vehId)
+                {
+                    List<Prop> prop = db.Props.Where(p => p.propId.Equals(item.propId)).ToList();
+
+                    foreach (var items in prop)
+                    {
+                        props.Add(items);
+                    }
+                }
+            }
+
+            List<Tool> tools = new List<Tool>();
+
+            foreach (var item in db.AssignedTools)
+            {
+                if (item.truckId == vehicle.vehId)
+                {
+                    List<Tool> tool= db.Tools.Where(p => p.toolId.Equals(item.toolId)).ToList();
+
+                    foreach (var items in tool)
+                    {
+                        tools.Add(items);
+                    }
+                }
+            }
+
+            List<Employee> emps = new List<Employee>();
+
+            foreach (var item in db.AssignedEmps)
+            {
+                if (item.truckId == vehicle.vehId)
+                {
+                    List<Employee> emp = db.Employees.Where(p => p.empId.Equals(item.empId)).ToList();
+
+                    foreach (var items in emp)
+                    {
+                        emps.Add(items);
+                    }
+                }
+            }
+
+            List<MaintenanceRecord> recs = new List<MaintenanceRecord>();
+
+            foreach (var item in db.MaintenanceRecords)
+            {
+                if (item.equipId == vehicle.TblEquip.equipId)
+                {
+                    recs.Add(item);
+                }
+            }
+
+            ViewBag.Records = recs;
+            ViewBag.Employees = emps; 
+            ViewBag.Tools = tools;
+            ViewBag.Properties = props;
+
             return View(vehicle);
         }
 

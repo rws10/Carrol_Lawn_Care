@@ -17,12 +17,13 @@ namespace Carrol_Lawn_Care.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equip()
         {
+            this.TblEmpAssigneds = new HashSet<AssignedEmp>();
             this.TblMaintRecs = new HashSet<MaintenanceRecord>();
             this.TblTools = new HashSet<Tool>();
+            this.TblToolAssigneds = new HashSet<AssignedTool>();
+            this.TblToolAssigneds1 = new HashSet<AssignedTool>();
+            this.TblTruckAssigneds = new HashSet<AssignedTruck>();
             this.TblVehicles = new HashSet<Vehicle>();
-            this.TblPers = new HashSet<Person>();
-            this.TblEquips = new HashSet<Equip>();
-            this.TblProps = new HashSet<Prop>();
         }
     
         public int equipId { get; set; }
@@ -31,17 +32,18 @@ namespace Carrol_Lawn_Care.Models
         public string type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssignedEmp> TblEmpAssigneds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaintenanceRecord> TblMaintRecs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tool> TblTools { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssignedTool> TblToolAssigneds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssignedTool> TblToolAssigneds1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssignedTruck> TblTruckAssigneds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vehicle> TblVehicles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Person> TblPers { get; set; }
-        public virtual Equip TblEquip1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equip> TblEquips { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Prop> TblProps { get; set; }
     }
 }

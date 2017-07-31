@@ -33,6 +33,35 @@ namespace Carrol_Lawn_Care.Controllers
             {
                 return HttpNotFound();
             }
+
+            List<String> equipType = new List<String>(new string[] { "", ""});
+
+            if (maintenanceRecord.TblEquip.type == "Truck" || maintenanceRecord.TblEquip.type == "Trailer")
+            {
+                //get the id from the proper table
+                foreach(var item in db.Vehicles)
+                {
+                    if(item.equipId == maintenanceRecord.TblEquip.equipId)
+                    {
+                        equipType[0] = item.vehId.ToString();
+                    }
+                }
+
+                equipType[1] = "vehicle";
+            }
+            else
+            {
+                foreach (var item in db.Tools)
+                {
+                    if (item.equipId == maintenanceRecord.TblEquip.equipId)
+                    {
+                        equipType[0] = item.toolId.ToString();
+                    }
+                }
+                equipType[1] = "tool";
+            }
+
+            ViewBag.equipType = equipType;
             return View(maintenanceRecord);
         }
 

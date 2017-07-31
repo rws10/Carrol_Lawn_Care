@@ -65,6 +65,18 @@
         }
     }
 
+    <h5>Truck Assigned:</h5>
+
+    @{foreach (var truck in (IEnumerable<Carrol_Lawn_Care.Models.Vehicle>)ViewBag.Truck)
+        {
+            <dl class="dl-horizontal">
+                <dd>
+                    @Html.ActionLink(@Html.DisplayName(truck.TblEquip.name).ToString(), "Details", "Vehicles", new { id = truck.vehId}, null)
+                </dd>
+            </dl>
+        }
+    }
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.propId }) |

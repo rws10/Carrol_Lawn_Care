@@ -12,15 +12,13 @@ namespace Carrol_Lawn_Care.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MaintenanceRecord
+    public partial class AssignedTruck
     {
-        public int maintId { get; set; }
-        public int equipId { get; set; }
-        public string maintType { get; set; }
-        public float cost { get; set; }
-        public System.DateTime date { get; set; }
-        public string description { get; set; }
+        public int assignId { get; set; }
+        public int propId { get; set; }
+        public int truckId { get; set; }
     
         public virtual Equip TblEquip { get; set; }
+        public virtual Prop TblProp { get; set; }
     }
 }

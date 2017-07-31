@@ -27,12 +27,16 @@ namespace Carrol_Lawn_Care.Models
     
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<AssignedEmp> AssignedEmps { get; set; }
         public virtual DbSet<Equip> Equips { get; set; }
         public virtual DbSet<MaintenanceRecord> MaintenanceRecords { get; set; }
+        public virtual DbSet<Manage> Manages { get; set; }
         public virtual DbSet<Owns> Owns { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Prop> Props { get; set; }
         public virtual DbSet<Tool> Tools { get; set; }
+        public virtual DbSet<AssignedTool> AssignedTools { get; set; }
+        public virtual DbSet<AssignedTruck> AssignedTrucks { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
     }
 }

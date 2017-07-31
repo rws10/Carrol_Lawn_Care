@@ -22,5 +22,9 @@ namespace Carrol_Lawn_Care.Models
 
         [Display(Name = "Assigned Equipment")]
         public virtual Equip TblEquip { get; set; }
+
+        [Display(Name = "Description")]
+        [StringLength(250, ErrorMessage = "Name cannot be longer than 250 characters.")]
+        public string description { get; set; }
     }
 }
